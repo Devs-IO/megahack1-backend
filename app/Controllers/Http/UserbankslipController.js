@@ -4,10 +4,8 @@
 // const FieldsValidator = use('App/Lib/FieldsValidator')
 // const Userbankslip = use('App/Models/Userbankslip')
 const IndexBuilder = use('App/Lib/IndexBuilder')
-const Invoice = use('App/Models/Invoice')
 
-
-class CategoryController {
+class UserbankslipController {
   async index ({ request, params }) {
     const data = request.only([
       'user_id'
@@ -20,17 +18,10 @@ class CategoryController {
 
     // check if it is the correct user
 
-    const loggedUser = await auth.getUser()
-    const username = loggedUser.username
-    const invoices =
+    const query = await IndexBuilder.build({ modelName, id, data, includes })
 
-
-
-
-        const query = await IndexBuilder.build({ modelName, id, data, includes })
-
-        return query
+    return query
   }
 }
 
-module.exports = CategoryController
+module.exports = UserbankslipController
